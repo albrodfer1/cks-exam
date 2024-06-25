@@ -106,6 +106,8 @@ EOF
 
 - `openssl x509 -req -in some.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out some.crt -days 100 -extfile some.cnf -extensions v3_req`: Sign certificate with CA and config file
 
+- `openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ingress.key -out ingress.crt -subj="/CN=example.internal/O=security"`: Create self-signed certificate for an ingress
+
 ### ETCD
 
 - `etcdctl put key value`: Write key value to etcd
