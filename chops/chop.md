@@ -64,7 +64,7 @@ rules:
 - `--authorization-mode=RBAC|AlwaysAllow|AlwaysDeny|Node`: authorization mode
 - `--encryption-provider-config`: Path to encryption provider config to encrypt data before writting to ETCD
 - `--audit-policy-file`: Path where the policy file config is stored
-
+- `--audit-log-path`
 
 ## Commands of interest
 

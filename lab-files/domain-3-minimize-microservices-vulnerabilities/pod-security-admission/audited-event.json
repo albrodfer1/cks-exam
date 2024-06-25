@@ -1,0 +1,38 @@
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "718bcada-3e2c-46af-8c2f-bb47f33a3ad5",
+  "stage": "ResponseComplete",
+  "requestURI": "/api/v1/namespaces/audit-restricted/pods?fieldManager=kubectl-run",
+  "verb": "create",
+  "user": {
+    "username": "kubernetes-admin",
+    "groups": [
+      "kubeadm:cluster-admins",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "10.0.1.147"
+  ],
+  "userAgent": "kubectl/v1.24.2 (linux/amd64) kubernetes/f66044f",
+  "objectRef": {
+    "resource": "pods",
+    "namespace": "audit-restricted",
+    "name": "privileged-2",
+    "apiVersion": "v1"
+  },
+  "responseStatus": {
+    "metadata": {},
+    "code": 201
+  },
+  "requestReceivedTimestamp": "2024-06-25T16:00:26.363107Z",
+  "stageTimestamp": "2024-06-25T16:00:26.375324Z",
+  "annotations": {
+    "authorization.k8s.io/decision": "allow",
+    "authorization.k8s.io/reason": "RBAC: allowed by ClusterRoleBinding \"kubeadm:cluster-admins\" of ClusterRole \"cluster-admin\" to Group \"kubeadm:cluster-admins\"",
+    "pod-security.kubernetes.io/audit-violations": "would violate PodSecurity \"restricted:latest\": privileged (container \"privileged-2\" must not set securityContext.privileged=true), allowPrivilegeEscalation != false (container \"privileged-2\" must set securityContext.allowPrivilegeEscalation=false), unrestricted capabilities (container \"privileged-2\" must set securityContext.capabilities.drop=[\"ALL\"]), runAsNonRoot != true (pod or container \"privileged-2\" must set securityContext.runAsNonRoot=true), seccompProfile (pod or container \"privileged-2\" must set securityContext.seccompProfile.type to \"RuntimeDefault\" or \"Localhost\")",
+    "pod-security.kubernetes.io/enforce-policy": "privileged:latest"
+  }
+}
