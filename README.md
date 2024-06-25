@@ -8,6 +8,16 @@ The labs I'm used are documented in here: https://github.com/zealvora/certified-
 
 Cheatsheets are under `chops` folder.
 
+## Calulate the cost of cloud resources
+
+As of the date of writting of this document, the resources have an estimated cost of 35$ a month. It was calculated using the tool `infracost`.
+
+To be run from `infrastructure/terraform/aws` folder:
+
+```shell
+infracost breakdown --path .
+```
+
 ## FAQ
 
 ### Why Cheatsheets are under `chops` folder?
