@@ -115,3 +115,7 @@ EOF
 ### Logging
 
 - `journalctl -e -u kube-apiserver|etcd|kubelet`: See events in `journalctl` filtering by process and starting from the latest ones
+
+## Notes
+
+- `kubeadm` creates certificates for `kube-apiserver` valid for 10.96.0.1 and internal IP addresses by default
