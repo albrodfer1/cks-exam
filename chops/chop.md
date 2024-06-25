@@ -29,6 +29,24 @@ rules:
 - level: Metadata
 ```
 
+- Admission control config file: ImagePullPolicyWebhook sets the image policy. Normally the kubeconfig file is set to use the kube-apiserver credentials in `/etc/kubernetes/pki`
+
+TODO: Determine where can you restrict the docker repositories you can download from
+
+```yaml
+apiVersion: apiserver.config.k8s.io/v1
+kind: AdmissionConfiguration
+plugins:
+- name: ImagePolicyWebhook
+  configuration:
+    imagePolicy:
+      kubeConfigFile: /etc/kubernetes/controlconf/webhook.kubeconfig
+      allowTTL: 50
+      denyTTL: 50
+      retryBackoff: 500
+      defaultAllow: true
+```
+
 ## Config files of interest path
 
 ### ETCD
@@ -62,9 +80,6 @@ rules:
 - `--cert`: Client certificate
 - `--key`: Client key
 - `--authorization-mode=RBAC|AlwaysAllow|AlwaysDeny|Node`: authorization mode
-- `--encryption-provider-config`: Path to encryption provider config to encrypt data before writting to ETCD
-- `--audit-policy-file`: Path where the policy file config is stored
-- `--audit-log-path`
 
 ## Commands of interest
 
@@ -74,7 +89,11 @@ rules:
 - `--tls-private-key-file`: Key of the TLS certificate for the API server
 - `--token-auth-file`: Path to csv to enable token based authentication
 - `--client-ca-file`: Path to CA certificate to authenticate client requests (mTLS)
-examples
+- `--encryption-provider-config`: Path to encryption provider config to encrypt data before writting to ETCD
+- `--audit-policy-file`: Path where the policy file config is stored
+- `--audit-log-path`
+- `--enable-admission-plugins`: Enable kube-apiserver admission-plugins
+- `--admission-control-config-file`: Path to admission control config file
 
 ### `kubectl`
 
