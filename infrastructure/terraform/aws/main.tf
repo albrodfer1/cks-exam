@@ -66,8 +66,8 @@ resource "aws_security_group" "cks_sg" {
   # Self-referencing ingress rule to allow traffic within the same security group
   ingress {
     from_port = 0
-    to_port   = 65535
-    protocol  = "tcp"
+    to_port   = 0
+    protocol  = "-1"
     self      = true
   }
 
