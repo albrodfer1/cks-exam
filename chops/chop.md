@@ -55,6 +55,10 @@ plugins:
 
 ## Config files of interest path
 
+### containerd
+
+- `/etc/containerd/config.toml`: containerd config
+
 ### ETCD
 
 - `var/lib/etcd`: Normally where `etcd` storage is
@@ -88,6 +92,10 @@ plugins:
 - `--authorization-mode=RBAC|AlwaysAllow|AlwaysDeny|Node`: authorization mode
 
 ## Commands of interest
+
+### containerd
+
+- `containerd config default`
 
 ### Api Server
 
