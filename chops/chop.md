@@ -55,6 +55,11 @@ plugins:
 
 ## Config files of interest path
 
+### seccomp
+
+- `grep syscall /var/log/syslog`: Seccomp loging
+- `/usr/include/asm/unistd_64.h`: Syscall ids
+
 ### falco
 
 - `/etc/falco/falco.yaml`: yaml with all the falco config. Amongst other config, you have there the rule files to apply
@@ -87,6 +92,10 @@ plugins:
 
 ## Command options of interest
 
+### tracee
+
+- `docker run --name tracee --rm --privileged --pid=host -v /lib/modules:/lib/modules:ro -v /usr/src:/usr/src:ro -v /tmp/tracee:/tmp/tracee aquasec/tracee:0.4.0 --trace container=new`
+
 ### ETCD
 
 - `--endpoints`: URL of etcd server
@@ -97,11 +106,51 @@ plugins:
 - `--key`: Client key
 - `--authorization-mode=RBAC|AlwaysAllow|AlwaysDeny|Node`: authorization mode
 
-## Commands of interest
-
-### containerd
+### Containerd
 
 - `containerd config default`
+
+### seccomp
+
+Not implemented by kubernetes by default.
+
+
+- `grep -i seccomp /boot/config-$(uname -r)`: check if seccomp is configured
+- `grep Seccomp /proc/1/status`: Seccomp: 2 means that seccomp is implemented (0 disabled, 1 strict, 2 filtered)
+
+  whitelist.json:
+  ```json
+  {
+    "defaultAction": "SCMP_ACT_ERRNO",
+    "archMap": [
+      {
+        "architecture": "SCMP_ARCH_X86_64",
+        "subArchitectures": [
+          "SCMP_ARCH_X86",
+          "SCMP_ARCH_X32"
+        ]
+      },
+      {
+        "architecture": "SCMP_ARCH_AARCH64",
+        "subArchitectures": [
+          "SCMP_ARCH_ARM"
+        ]
+      }
+    ],
+    "syscalls": [
+      {
+        "names": [
+          "read",
+          "write",
+          "exit",
+          "exit_group"
+        ],
+        "action": "SCMP_ACT_ALLOW"
+      }
+    ]
+  }
+  ```
+
 
 ### Api Server
 
