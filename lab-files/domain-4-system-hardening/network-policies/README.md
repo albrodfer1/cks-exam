@@ -1,0 +1,1 @@
+TODO: uninstall flannel and install calico to play around with network policies
