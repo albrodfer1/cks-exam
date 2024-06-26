@@ -74,6 +74,7 @@ plugins:
 ### Kubelet
 
 - `/var/lib/kubelet/config.yaml`: Normally where the kubelet config is stored
+- `/var/lib/kubelet/seccomp/`: Seccomp profiles
 
 ## Config files options of interest
 
@@ -82,6 +83,7 @@ plugins:
 - In kubelet config (`/var/lib/kubelet/config.yaml`) `authentication.anonymous.enabled` controls authentication in `kubelet`
 
 - In kubelet config (`/var/lib/kubelet/config.yaml`) `authorization.mode: Webhook|AlwaysAllow|AlwaysDeny` controls authorization in `kubelet`
+
 
 ## Command options of interest
 
