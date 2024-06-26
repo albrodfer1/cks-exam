@@ -1,5 +1,11 @@
 # CKS Exam preparation
 
+## PodAnnotations of interest
+
+### KubeArmor
+
+- `container.apparmor.security.beta.kubernetes.io/hello: localhost/k8s-apparmor-example-deny-write`: Load app armor profile. If not set, it doesn't work in the node. If set but deployed in a node with not that app armorprofile it fails with error `Error: failed to get container spec opts: failed to generate apparmor spec opts: apparmor profile not found k8s-apparmor-example-deny-write`
+
 ## Config file strucure (examples)
 
 ### Api Server
@@ -143,6 +149,12 @@ EOF
 - `aa-status`: App armor status. Shows the profiles loaded
 
 - `ln -s /etc/apparmor.d/root.apparmor.myscript.sh /etc/apparmor.d/disable/ & apparmor_parser -R /etc/apparmor.d/root.apparmor.myscript.sh`: Disable apparmor profile
+
+- `apparmor_parser -q <<EOF`: Create an apparmor profile and loads it directly to the kernel
+
+- `systemctl reload apparmor`
+
+- You can unload the profile using `apparmor_parser` by specifying the `-R` option. This removes the profile from the in-kernel policy.
 
   #### Explanation of a profile
 
