@@ -55,6 +55,10 @@ plugins:
 
 ## Config files of interest path
 
+### falco
+
+- `/etc/falco/falco.yaml`: yaml with all the falco config. Amongst other config, you have there the rule files to apply
+
 ### containerd
 
 - `/etc/containerd/config.toml`: containerd config
