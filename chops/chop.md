@@ -133,6 +133,99 @@ EOF
 - `etcdctl get key`: Get value from etcd
 - `etcdctl del key`: Remove key from etcd
 
+## AppArmor
+
+- `aa-genprof script.sh`:
+  1. Create a security profile for the script, you need to run it once to do so
+  2. Profile stored in `/etc/apparmor.d/root.apparmor.script.sh`
+  3. Only affects tp the script you marked `script.sh`, if I copy its content to another, this other is not affected by this apparmour policy.
+
+- `aa-status`: App armor status. Shows the profiles loaded
+
+- `ln -s /etc/apparmor.d/root.apparmor.myscript.sh /etc/apparmor.d/disable/ & apparmor_parser -R /etc/apparmor.d/root.apparmor.myscript.sh`: Disable apparmor profile
+
+  #### Explanation of a profile
+
+  ```
+  # Last Modified: Wed Jun 26 07:52:24 2024
+  abi <abi/3.0>,
+
+  include <tunables/global>
+
+  /root/apparmor/myscript.sh {
+    include <abstractions/base>
+    include <abstractions/bash>
+    include <abstractions/consoles>
+    include <abstractions/user-tmp>
+
+    /root/apparmor/myscript.sh r,
+    /usr/bin/bash ix,
+    /usr/bin/rm mrix,
+    /usr/bin/touch mrix,
+
+  }
+  ```
+  #### Breakdown of the Profile
+  ##### Header Information
+
+  ```
+  # Last Modified: Wed Jun 26 07:52:24 2024
+  abi <abi/3.0>,
+  include <tunables/global>
+  ```
+  **\# Last Modified**: Indicates the date and time when the profile was last modified.
+
+  **abi `<abi/3.0>`**: Specifies the application binary interface (ABI) version. This ensures compatibility with the version of AppArmor's ABI.
+
+  **include `<tunables/global>`**: Includes global tunables, which define variables used across all AppArmor profiles. Typically, these include system-specific paths or settings.
+  ##### Profile Definition for the Script
+
+  ```
+  /root/apparmor/myscript.sh {
+  ```
+  
+  **/root/apparmor/myscript.sh**: Specifies the profile applies to the script at this path.
+  
+  ##### Include Abstractions
+
+  ```
+  include <abstractions/base>
+  include <abstractions/bash>
+  include <abstractions/consoles>
+  include <abstractions/user-tmp>
+  ```
+
+  These lines include common policy abstractions, which are reusable sets of rules:
+
+  **`<abstractions/base>`**: General security policies for many basic system functions.
+
+  **`<abstractions/bash>`**: Policies specific to the Bash shell, which might include common commands and interactions.
+
+  **`<abstractions/consoles>`**: Rules for interactions with console devices.
+
+  **`<abstractions/user-tmp>`**: Rules for using temporary files in user space.
+  File and Capability Permissions
+
+  ```
+  /root/apparmor/myscript.sh r,
+  /usr/bin/bash ix,
+  /usr/bin/rm mrix,
+  /usr/bin/touch mrix,
+  ```
+
+  These lines specify what actions are allowed for the script and other programs it might interact with:
+
+  **/root/apparmor/myscript.sh r,**: The script can be read (r) by itself.
+  /usr/bin/bash ix,: The script can execute (x) Bash with inheritance (i), meaning that the permissions of the script apply to the subprocesses started by Bash.
+
+  **/usr/bin/rm mrix**,: The script can execute (x) the rm command with permissions to read (r), write (w), and modify (m) files.
+
+  **/usr/bin/touch mrix**,: The script can execute (x) the touch command with permissions to read (r), write (w), and modify (m) files.
+
+  ##### NOTE: m Permission in AppArmor
+  The m stands for "memory map" and includes capabilities related to memory management and manipulation, such as:
+
+
 ### Logging
 
 - `journalctl -e -u kube-apiserver|etcd|kubelet`: See events in `journalctl` filtering by process and starting from the latest ones
