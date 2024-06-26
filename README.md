@@ -2,7 +2,7 @@
 
 This repo was used for personal preparation for the CKS exam. It contains infrastructure to be deployed in AWS to provision a lab environment and some cheatsheets with basic info useful for the exam.
 
-The labs I'm used are documented in here: https://github.com/zealvora/certified-kubernetes-security-specialist/
+The labs I used are documented in here: https://github.com/zealvora/certified-kubernetes-security-specialist/
 
 ## Cheatsheets
 
