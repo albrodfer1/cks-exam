@@ -92,6 +92,10 @@ plugins:
 
 ## Command options of interest
 
+### Falco
+
+- `kill -1 $(cat /var/run/falco.pid)` or `systemctl restart falco`: Reload falco
+
 ### tracee
 
 - `docker run --name tracee --rm --privileged --pid=host -v /lib/modules:/lib/modules:ro -v /usr/src:/usr/src:ro -v /tmp/tracee:/tmp/tracee aquasec/tracee:0.4.0 --trace container=new`
@@ -135,7 +139,7 @@ Not implemented by kubernetes by default.
         "subArchitectures": [
           "SCMP_ARCH_ARM"
         ]
-      }
+      }'Write below binary dir'
     ],
     "syscalls": [
       {
@@ -308,3 +312,20 @@ EOF
 ## Notes
 
 - `kubeadm` creates certificates for `kube-apiserver` valid for 10.96.0.1 and internal IP addresses by default
+
+## Other
+
+### Falco
+
+#### Fields
+
+- `%user.name`
+- `%user.loginuid`
+- `%user.uid`
+- `%proc.cmdline`: command
+- `%proc.pid`: pid
+- `%fd.name`: file name
+- `%proc.pname`: parent process name
+- `pcmdline=%proc.pcmdline`: parent process command
+- `%container.id`: container id
+- `%container.image.repository`: container image
