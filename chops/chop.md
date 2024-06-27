@@ -92,6 +92,10 @@ plugins:
 
 ## Command options of interest
 
+### kubectl
+
+- `k get po apps-cluster-dash -oyaml | k replace --force --save-config -f -`: replace pod
+
 ### Falco
 
 - `kill -1 $(cat /var/run/falco.pid)` or `systemctl restart falco`: Reload falco
@@ -344,3 +348,8 @@ EOF
 #### annotations
 
 - `pod-security.kubernetes.io/<MODE>: <LEVEL`: MODE must be one of `enforce`, `audit`, or `warn`. LEVEL must be one of `privileged`, `baseline`, or `restricted`.
+
+### ServiceAccountAutomount
+
+`automountServiceAccountToken: false`
+
