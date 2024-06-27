@@ -329,3 +329,9 @@ EOF
 - `pcmdline=%proc.pcmdline`: parent process command
 - `%container.id`: container id
 - `%container.image.repository`: container image
+
+### PodSecurityAdmission
+
+#### annotations
+
+- `pod-security.kubernetes.io/<MODE>: <LEVEL`: MODE must be one of `enforce`, `audit`, or `warn`. LEVEL must be one of `privileged`, `baseline`, or `restricted`.
