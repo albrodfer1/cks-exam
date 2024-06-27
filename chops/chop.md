@@ -221,6 +221,15 @@ EOF
 
 - `systemctl reload apparmor`
 
+- You can verify that the container is actually running with that profile by checking /proc/1/attr/current:
+  ```shell
+  kubectl exec hello-apparmor -- cat /proc/1/attr/current
+  ```
+  The output should be:
+  ```text
+  k8s-apparmor-example-deny-write (enforce)
+  ```
+
 - You can unload the profile using `apparmor_parser` by specifying the `-R` option. This removes the profile from the in-kernel policy.
 
   #### Explanation of a profile
