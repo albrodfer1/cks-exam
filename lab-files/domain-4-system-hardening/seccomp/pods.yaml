@@ -1,0 +1,57 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: nginx-1
+  name: nginx-1
+spec:
+  securityContext:
+    seccompProfile:
+      type: Localhost
+      localhostProfile: profiles/audit.json
+  containers:
+  - image: nginx
+    name: nginx-1
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: nginx-2
+  name: nginx-2
+spec:
+  securityContext:
+    seccompProfile:
+      type: Localhost
+      localhostProfile: profiles/violation.json
+  containers:
+  - image: nginx
+    name: nginx-2
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: nginx-3
+  name: nginx-3
+spec:
+  securityContext:
+    seccompProfile:
+      type: Localhost
+      localhostProfile: profiles/fine-grained.json
+  containers:
+  - image: nginx
+    name: nginx-3
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
