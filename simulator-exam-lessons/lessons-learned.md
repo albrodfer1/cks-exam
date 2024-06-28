@@ -26,3 +26,11 @@ ps aux | grep process-name
 # use strace to find the traces
 strace -p pid
 ```
+
+### Dashboard
+
+- Kubernetes-dashboard --auto-generate-certificates set
+- Kubernetes-dashboard --authentication-mode=basic not set
+- Kubernetes-dashboard --enable-skip-login=true not set
+- Kubernetes-dashboard --enable-insecure-login not set
+- Service kubernetes-dashboard is type ClusterIP
