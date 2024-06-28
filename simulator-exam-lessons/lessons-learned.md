@@ -34,3 +34,7 @@ strace -p pid
 - Kubernetes-dashboard --enable-skip-login=true not set
 - Kubernetes-dashboard --enable-insecure-login not set
 - Service kubernetes-dashboard is type ClusterIP
+
+### NetworkPolicies
+
+- ipBlock has an `except` field
