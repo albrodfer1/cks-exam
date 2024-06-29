@@ -4,7 +4,7 @@
 
 ### KubeArmor
 
-- `container.apparmor.security.beta.kubernetes.io/hello: localhost/k8s-apparmor-example-deny-write`: Load app armor profile. If not set, it doesn't work in the node. If set but deployed in a node with not that app armorprofile it fails with error `Error: failed to get container spec opts: failed to generate apparmor spec opts: apparmor profile not found k8s-apparmor-example-deny-write`
+- (DEPRECATED) `container.apparmor.security.beta.kubernetes.io/hello: localhost/k8s-apparmor-example-deny-write`: Load app armor profile. If not set, it doesn't work in the node. If set but deployed in a node with not that app armorprofile it fails with error `Error: failed to get container spec opts: failed to generate apparmor spec opts: apparmor profile not found k8s-apparmor-example-deny-write`
 
 ## Config file strucure (examples)
 
