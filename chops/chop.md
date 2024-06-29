@@ -37,7 +37,6 @@ rules:
 
 - Admission control config file: ImagePullPolicyWebhook sets the image policy. Normally the kubeconfig file is set to use the kube-apiserver credentials in `/etc/kubernetes/pki`
 
-TODO: Determine where can you restrict the docker repositories you can download from
 
 ```yaml
 apiVersion: apiserver.config.k8s.io/v1
